@@ -66,14 +66,19 @@ healDefault: Start the world in heal mode. Perhaps you want to configure your
 pack to start the plague when a certain event happens. (The command
 /healplague off can start it.)
 
+patchyDecay: If true, dragonskin decays in 'patches' of blocks, rather than
+individual blocks
+
 Commands:
 
-Currently there is one command, avaiable to ops:
+There is one command, avaiable to ops:
 
-/healplague: Turns plague healing on or off. (/heaplague on, or /heaplague
+/healplague: Turns plague healing on or off. (/healplague on, or /healplague
 off)
 
+There is another command, not strictly related to the Plagued Sky effect. It
+serves mainly as a helper command for the Creeping Dark pack:
 
+/loadchunk <dimension> <chunkX> <chunkZ>
 
-
-
+This loads the chunk at the given dimension and coordinates.

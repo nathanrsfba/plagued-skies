@@ -84,6 +84,22 @@ public class DragonSkin extends Block
 				world.setBlockState( pos, Blocks.AIR.getDefaultState() );
 			}
 			
+			if( Config.patchyDecay )
+			{
+				/* When a block decays, schedule its neighbors to decay. When this
+				 * happens recursively, blocks will decay in 'patches', rather than
+				 * individual blocks.
+				 * 
+				 * There is only a 50% chance for a given neighbor to have a decay
+				 * scheduled. This gives the patches a more 'organic' shape
+				 */
+				if( rand.nextBoolean() ) world.scheduleBlockUpdate( new BlockPos( pos.getX() + 1, pos.getY(), pos.getZ() ), this, 1, 1 );
+				if( rand.nextBoolean() ) world.scheduleBlockUpdate( new BlockPos( pos.getX() - 1, pos.getY(), pos.getZ() ), this, 1, 1 );
+				if( rand.nextBoolean() ) world.scheduleBlockUpdate( new BlockPos( pos.getX(), pos.getY(), pos.getZ() + 1 ), this, 1, 1 );
+				if( rand.nextBoolean() ) world.scheduleBlockUpdate( new BlockPos( pos.getX(), pos.getY(), pos.getZ() - 1 ), this, 1, 1 );
+				// /fill ~-32 255 ~-32 ~32 255 ~32 plaguesky:dragonskin
+			}
+
 			decayCount++;
 			if( decayCount > Config.spreadCap && Config.spreadCap != 0 )
 			{

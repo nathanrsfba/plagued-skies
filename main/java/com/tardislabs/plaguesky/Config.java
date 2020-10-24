@@ -23,6 +23,7 @@ public class Config
 	public static int spreadDelay;
 	public static int spreadCap;
 	public static boolean healDefault;
+	public static boolean patchyDecay;
 	public static String[] skinOres;
 	public static Vector<IBlockState> skinOreBlocks;;
 
@@ -89,6 +90,8 @@ public class Config
 				"How quickly a decaying dragonscale block should turn into an ore." );
 		healDefault = cfg.getBoolean( "healDefault", CATEGORY_GENERAL, false, 
 				"Start the world in heal mode. Perhaps you want to configure your pack to start the plague when a certain event happens. (The command /healplague off can start it.)" );
+		patchyDecay = cfg.getBoolean( "patchyDecay", CATEGORY_GENERAL, true, 
+				"When dragonskin blocks decay, they decay in patches of connected blocks, rather than individual blocks" );
 		skinOres = cfg.getStringList( "skinOres", CATEGORY_GENERAL, defaultOres,
 				"The ores that might be released from Dragonscale. This can be a resource ID (minecraft:stone) or an oredict entry (oreIron)" );
 	}

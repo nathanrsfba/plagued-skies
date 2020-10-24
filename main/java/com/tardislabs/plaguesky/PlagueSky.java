@@ -24,7 +24,7 @@ public class PlagueSky
     /**
      * The version of this mod
      */
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.3";
 
     /**
      * A logger for printing debugging info to the console
