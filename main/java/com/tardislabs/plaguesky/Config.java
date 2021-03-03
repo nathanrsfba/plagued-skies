@@ -23,6 +23,7 @@ public class Config
 	public static int spreadDelay;
 	public static int spreadCap;
 	public static boolean healDefault;
+	public static boolean debug;
 	public static boolean patchyDecay;
 	public static String[] skinOres;
 	public static Vector<IBlockState> skinOreBlocks;;
@@ -94,6 +95,8 @@ public class Config
 				"When dragonskin blocks decay, they decay in patches of connected blocks, rather than individual blocks" );
 		skinOres = cfg.getStringList( "skinOres", CATEGORY_GENERAL, defaultOres,
 				"The ores that might be released from Dragonscale. This can be a resource ID (minecraft:stone) or an oredict entry (oreIron)" );
+		debug = cfg.getBoolean( "debug", CATEGORY_GENERAL, false, 
+				"Display debugging data in the console" );
 	}
 
 	/*

@@ -33,7 +33,10 @@ public class PlagueSky
     
     public static void mutter( String info )
     {
-    	logger.info( info );
+    	if( Config.debug )
+    	{
+    		logger.info( info );
+    	}
     }
 
 	public static Data store = null;
