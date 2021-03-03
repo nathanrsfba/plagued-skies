@@ -25,7 +25,7 @@ public class CommonProxy
     /**
      * The configuration file for the mod
      */
-    public static Configuration config;
+    public static Configuration config = null;
 	
     public void preInit( FMLPreInitializationEvent event ) 
     {

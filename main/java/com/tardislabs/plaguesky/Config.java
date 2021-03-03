@@ -23,7 +23,7 @@ public class Config
 	public static int spreadDelay;
 	public static int spreadCap;
 	public static boolean healDefault;
-	public static boolean debug;
+	public static boolean debug = true;
 	public static boolean patchyDecay;
 	public static String[] skinOres;
 	public static Vector<IBlockState> skinOreBlocks;;
