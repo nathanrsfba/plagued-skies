@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderServer;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
@@ -173,6 +174,23 @@ public class DragonSkin extends Block
 	{
 		String status =	doTick( event );
 		// if( !status.isEmpty() ) PlagueSky.mutter( status );
+	}
+	
+	@SubscribeEvent
+	public void OnWorldLoad( WorldEvent.Load event )
+	{
+		if( event.getWorld().provider.getDimension() == 0 )
+		{
+			/* Reset all of this when the world is loaded, since we'll have
+			 * stale data if the player has switched worlds */
+
+			PlagueSky.mutter( "Resetting internal variables" );
+			lastSpread = 0;
+			lastSpreadCheck = 0;
+			growthQueue = 0;
+			nextDecay = 0;
+			long decayCount = 0;
+		}
 	}
 	
 	private String doTick( WorldTickEvent event )
