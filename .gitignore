@@ -1,3 +1,18 @@
+# Backup garbage
 *~
 *.bak
 *.swp
+
+*.bat
+.classpath
+.gradle/
+.metadata/
+.project
+.settings/
+bin/
+build/
+emc/
+*.launch
+gradle/
+gradlew
+run/
