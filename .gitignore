@@ -3,16 +3,37 @@
 *.bak
 *.swp
 
+# Stuff for my own use
 *.bat
-.classpath
-.gradle/
-.metadata/
-.project
-.settings/
-bin/
-build/
-emc/
+
+# Forge docs
+changelog.txt
+CREDITS.txt
+LICENSE.txt
+
+# eclipse
+bin
 *.launch
-gradle/
-gradlew
-run/
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+
