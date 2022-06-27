@@ -1,50 +1,39 @@
 package com.tardislabs.plaguesky;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-import net.minecraft.world.storage.MapStorage;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.storage.WorldSavedData;
 
 public class Data extends WorldSavedData 
 {
-    private static final String tagKey = "PlagueSky";
-
     private boolean heal = false;
 
-	public Data( String name ) 
+	public Data() 
 	{
-		super( name );
+		super( PlagueSky.MODID );
 	}
 	
-	public static Data get( World world )
+	public static Data create()
 	{
-		MapStorage storage = world.getPerWorldStorage();
-		Data result = (Data) storage.getOrLoadData( Data.class, tagKey );
-		// PlagueSky.mutter( "-------------------- Loaded data. Was " + (result == null ? "null" : "not null") );
+		Data data = new Data();
+		data.heal = Config.COMMON.healDefault.get();
+		return data;
+	}
 	
-		if( result == null ) 
-		{
-			result = new Data( tagKey );
-			if( Config.healDefault ) result.heal = true;
-			storage.setData( tagKey, result );
-		}
+	@Override
+	public void read( CompoundNBT nbt ) 
+	{
+		if( nbt.contains( "heal" )) heal = nbt.getBoolean( "heal" );
+	}
+
+
+	@Override
+	public CompoundNBT write( CompoundNBT nbt ) 
+	{
+		nbt.putBoolean( "heal", heal );
 		
-		return result;
-	}
-
-	public void readFromNBT( NBTTagCompound nbt ) 
-	{
-		// PlagueSky.mutter( "In readFromNBT. " + nbt.getSize() );
-		if( nbt.hasKey( "heal" )) heal = nbt.getBoolean( "heal" );
-	}
-
-	public NBTTagCompound writeToNBT( NBTTagCompound nbt ) 
-	{
-		nbt.setBoolean( "heal",  heal );
-		// PlagueSky.mutter( "In writeToNBT. " + nbt.getSize() );
 		return nbt;
 	}
-	
+
     public boolean isHealing()
     {
     	return heal;
@@ -60,5 +49,4 @@ public class Data extends WorldSavedData
     {
     	setHealing( true );
     }
-
 }

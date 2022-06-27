@@ -1,27 +1,63 @@
 package com.tardislabs.plaguesky;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import java.util.List;
 
-public class EggHandler 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextComponent;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+public class EggHandler
 {
-	@SubscribeEvent
-	public void onPlayerInteract( PlaceEvent event )
+	public EggHandler()
 	{
-		if( event.getWorld().isRemote ) return;
-		if( event.getWorld().provider.getDimension() != 0 ) return;
-		if( event.getPlacedBlock().getBlock() != Blocks.DRAGON_EGG ) return;
-		// PlagueSky.mutter( "Placed egg in overworld" );
-		Data data = Data.get( event.getWorld() );
+        MinecraftForge.EVENT_BUS.register( this );
+	}
+	@SubscribeEvent
+	public void onPlaceBlock( BlockEvent.EntityPlaceEvent event )
+	{
+		// Make sure we're running on the server side
+		if( event.getWorld().isRemote() ) return;
+		
+		ServerWorld world = (ServerWorld) event.getWorld();
+		if( !world.getDimensionKey().equals( World.OVERWORLD )) return;
+		if( !event.getPlacedBlock().getBlock().equals( Blocks.DRAGON_EGG )) return;
+		
+		Data data = world.getSavedData().getOrCreate( Data::create, PlagueSky.MODID );
 		if( data.isHealing() ) return;
 		data.setHealing();
-		for( EntityPlayerMP player: 
-			event.getWorld().getMinecraftServer().getPlayerList().getPlayers() )
+		List<ServerPlayerEntity> players = world.getServer().getPlayerList().getPlayers();
+		for( ServerPlayerEntity player: players ) 
 		{
-			player.sendMessage( new TextComponentString( "The healing has begun." ));
+			player.sendStatusMessage( new StringTextComponent( "The healing has begun." ), false );
 		}
 	}
+
+	@SubscribeEvent
+	public void onBreakBlock( BlockEvent.BreakEvent event )
+	{
+		// Make sure we're running on the server side
+		if( event.getWorld().isRemote() ) return;
+		
+		ServerWorld world = (ServerWorld) event.getWorld();
+		if( !world.getDimensionKey().equals( World.OVERWORLD )) return;
+		if( !event.getState().getBlock().equals( Blocks.DRAGON_EGG )) return;
+		
+		Data data = world.getSavedData().getOrCreate( Data::create, PlagueSky.MODID );
+		if( !data.isHealing() ) return;
+		data.setHealing( false );
+		List<ServerPlayerEntity> players = world.getServer().getPlayerList().getPlayers();
+		for( ServerPlayerEntity player: players ) 
+		{
+			player.sendStatusMessage( new StringTextComponent( "The healing has stopped." ), false );
+		}
+	}
+
 }

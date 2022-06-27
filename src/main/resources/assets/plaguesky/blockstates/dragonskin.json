@@ -1,11 +1,6 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"model": "plaguesky:dragonskin"
-	},
 	"variants": {
-		"normal": [{}],
-		"inventory": [{}]
+		"": { "model": "plaguesky:block/dragonskin" }
 	}
 }
 		
