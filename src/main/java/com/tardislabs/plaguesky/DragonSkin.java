@@ -77,7 +77,7 @@ public class DragonSkin extends Block
 		// super.tick( state, worldIn, pos, rand );
 		
 		long now = world.getGameTime();
-		PlagueSky.LOGGER.info( "Tick at " + now );
+		PlagueSky.mutter( "Tick at " + now );
 
 		Data data = world.getSavedData().getOrCreate( Data::create, PlagueSky.MODID );
 		
@@ -142,7 +142,7 @@ public class DragonSkin extends Block
 		
 		if( rand.nextInt( 100 ) < fraction ) growths++;
 		growthQueue += growths;
-		PlagueSky.LOGGER.info( "Queueing " + growths + " growths" );
+		PlagueSky.mutter( "Queueing " + growths + " growths" );
 		
         // PlagueSky.mutter( "lastSpread: " + lastSpread + "; spreadDelay: " + Config.spreadDelay + "; Now: " + now ); 
 		if( lastSpread + Config.COMMON.spreadDelay.get() * 20 > now ) return; 
@@ -158,7 +158,7 @@ public class DragonSkin extends Block
         	growths = Config.COMMON.spreadCap.get();
         }
         
-        PlagueSky.LOGGER.info( "Growing " + growths + " blocks queued over past " + 
+        PlagueSky.mutter( "Growing " + growths + " blocks queued over past " + 
         		(now - lastSpread) + " ticks" );
 		for( int i = 0; i < growths; i++ )
 		{
@@ -171,7 +171,7 @@ public class DragonSkin extends Block
 	
 	public BlockPos spread( ServerWorld world, BlockPos pos, Random rand )
 	{
-		PlagueSky.LOGGER.info( "Spreading skin at " + pos.getX() + "x" + pos.getY() + "x" + pos.getZ() );
+		PlagueSky.mutter( "Spreading skin at " + pos.getX() + "x" + pos.getY() + "x" + pos.getZ() );
 		// Pick a random direction; N/E/S/W
 		int dir = rand.nextInt( 4 );
 		int dx = 0;
@@ -256,7 +256,7 @@ public class DragonSkin extends Block
 		{
 			if( player.world.getDimensionKey().equals( World.OVERWORLD )) {
 				online.add( player );
-				PlagueSky.LOGGER.info( "Considering player " + player.toString() ); 
+				PlagueSky.mutter( "Considering player " + player.toString() ); 
 			}
 		}
 
@@ -297,7 +297,7 @@ public class DragonSkin extends Block
 			growthQueue = 0;
 			nextDecay = 0;
 			
-			PlagueSky.LOGGER.info( "Resetting internal data " );
+			PlagueSky.mutter( "Resetting internal data " );
 		}
 	}
 	

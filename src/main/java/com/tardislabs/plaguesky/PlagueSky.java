@@ -51,7 +51,6 @@ public class PlagueSky
     public PlagueSky() 
     {
         FMLJavaModLoadingContext.get().getModEventBus().addListener( this::setup );
-        FMLJavaModLoadingContext.get().getModEventBus().addListener( this::clientSetup );
         ModLoadingContext.get().registerConfig( ModConfig.Type.COMMON, Config.COMMON_SPEC );
 
         // Register ourselves for server and other game events we are interested in
@@ -62,40 +61,18 @@ public class PlagueSky
         
     }
     
-   
+    /**
+     * Log an information message, if debug is enabled
+     */
+    public static void mutter( String message )
+    {
+    	if( Config.COMMON.debug.get() ) LOGGER.info( message );
+    }
 
     private void setup( final FMLCommonSetupEvent event )
     {
         // some preinit code
-        LOGGER.info( "HELLO FROM PREINIT" );
-        LOGGER.info( "DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName() );
         MinecraftForge.EVENT_BUS.register( commandHandler );
     }
     
-    private void clientSetup( final FMLClientSetupEvent event ) 
-    {
-        // do something that can only be done on the client
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting( FMLServerStartingEvent event ) 
-    {
-        // do something when the server starts
-        LOGGER.info( "HELLO from server starting" );
-    }
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber( bus=Mod.EventBusSubscriber.Bus.MOD )
-    public static class RegistryEvents 
-    {
-        @SubscribeEvent
-        public static void onBlocksRegistry(
-        		final RegistryEvent.Register<Block> blockRegistryEvent ) 
-        {
-            // register a new block here
-            LOGGER.info( "HELLO from Register Block" );
-        }
-    }
 }
