@@ -94,6 +94,18 @@ public class DragonSkin extends Block
 			{
 				world.setBlockState( pos, Blocks.AIR.getDefaultState() );
 			}
+
+			decayCount++;
+			// PlagueSky.mutter( "decayCount=" + decayCount + " config=" + Config.COMMON.spreadCap.get() );
+			if( decayCount > Config.COMMON.spreadCap.get() && 
+					Config.COMMON.spreadCap.get() != 0 )
+			{
+				nextDecay = now + Config.COMMON.spreadDelay.get() * 20;
+				decayCount = 0;
+				PlagueSky.mutter( "Decay limit exceeded; waiting " + 
+						Config.COMMON.spreadDelay.get() + "s" );
+
+			}
 			return;
 		}
 			
@@ -117,19 +129,9 @@ public class DragonSkin extends Block
 				*  //
 				// /fill ~-32 255 ~-32 ~32 255 ~32 plaguesky:dragonskin
 			}
-
-			decayCount++;
-			if( decayCount > Config.COMMON.spreadCap.get() && 
-					Config.COMMON.spreadCap.get() != 0 )
-			{
-				nextDecay = now + Config.COMMON.spreadDelay.get() * 20;
-				decayCount = 0;
-				PlagueSky.LOGGER.info( "Decay limit exceeded; waiting " + 
-						Config.COMMON.spreadDelay.get() + "s" );
-				
-			}
-			return;
 			*/
+
+		// return;
 		
 		lastSpreadCheck = now;
 		
