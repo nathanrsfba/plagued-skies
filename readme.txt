@@ -20,6 +20,11 @@ randomly die, with a random chance of dropping dragonscale, which falls like
 gravel. The egg need only be placed once; healing will continue even if it is
 picked up again.
 
+The dragonskin can also be temporarily removed by placing a beacon directly
+underneath it, whether activated or not. This will clear a small patch around
+the beacon. This only occurs when the beacon is placed; it does not prevent
+dragonskin growing back over it.
+
 Configuration:
 
 The plaguesky.cfg file has a few configuration options to control the spread
@@ -61,6 +66,9 @@ skinOres: The ores that might be released from Dragonscale. This can be a
 resource ID (minecraft:stone), a resource ID with metadata (minecraft:coal:1)
 or an oredict entry (oreIron). Note that despite the name, this can be any
 placeable block, not just ores.
+
+beaconBlastRadius: The radius, in blocks, of dragonskin cleared by placing a
+beacon.
 
 healDefault: Start the world in heal mode. Perhaps you want to configure your
 pack to start the plague when a certain event happens. (The command
