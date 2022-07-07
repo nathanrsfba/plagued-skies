@@ -76,9 +76,5 @@ There is one command, avaiable to ops:
 /healplague: Turns plague healing on or off. (/healplague on, or /healplague
 off)
 
-There is another command, not strictly related to the Plagued Sky effect. It
-serves mainly as a helper command for the Creeping Dark pack:
-
-/loadchunk <dimension> <chunkX> <chunkZ>
-
-This loads the chunk at the given dimension and coordinates.
+The chunk loading command is no longer present in the 1.16 version, as it is
+not needed in the present version of the pack.
