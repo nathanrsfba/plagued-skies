@@ -37,6 +37,7 @@ public class Config
 		// public static int spreadBatch;
 		public final IntValue spreadDelay;
 		public final IntValue spreadCap;
+		public final IntValue beaconBlastRadius;
 		public final BooleanValue healDefault;
 		public final BooleanValue debug;
 		public final BooleanValue patchyDecay;
@@ -73,6 +74,10 @@ public class Config
 							"of spreadCap per spreadDelay seconds. Lower this if you're " +
 							"getting a lot of lag/dropped ticks on spreading. (0=No limit)" )
 					.defineInRange( "spreadCap", 500, 0, Integer.MAX_VALUE );
+			beaconBlastRadius = builder 
+					.comment( "The radius, in blocks, that a beacon will blast dragonskin " +
+							  "blocks overhead when placed." )
+					.defineInRange( "beaconBlastRadius", 8, 0, Integer.MAX_VALUE );
 			decayPercent = builder 
 					.comment( "The speed at which dragonskin decays in heal mode. 100 is " +
 							"roughtly the speed that grass dies when covered. If decaying " +

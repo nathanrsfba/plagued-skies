@@ -60,7 +60,7 @@ public class EggHandler
 				{
 					// PlagueSky.mutter( "Hit dragonskin" );
 					
-					int r = 8;
+					int r = Config.COMMON.beaconBlastRadius.get();
 					for( int x1 = x - r; x1 < x + r; x1++ )
 					{
 						for( int z1 = z - r; z1 < z + r; z1++ )
