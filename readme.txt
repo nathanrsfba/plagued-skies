@@ -86,3 +86,11 @@ off)
 
 The chunk loading command is no longer present in the 1.16 version, as it is
 not needed in the present version of the pack.
+
+Changes:
+
+v1.4:
+ * Ported to 1.16
+ * Added feature to remove dragonskin using beacon
+ * Removed chunk load command
+ * 'Patchy' decay currently not implemented
