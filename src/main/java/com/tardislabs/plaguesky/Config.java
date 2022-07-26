@@ -22,6 +22,7 @@ public class Config
 	// public static int spreadBatch;
 	public static int spreadDelay;
 	public static int spreadCap;
+	public static int beaconBlastRadius; 
 	public static boolean healDefault;
 	public static boolean debug = true;
 	public static boolean patchyDecay;
@@ -97,6 +98,10 @@ public class Config
 				"The ores that might be released from Dragonscale. This can be a resource ID (minecraft:stone) or an oredict entry (oreIron)" );
 		debug = cfg.getBoolean( "debug", CATEGORY_GENERAL, false, 
 				"Display debugging data in the console" );
+		beaconBlastRadius = cfg.getInt( 
+				"beaconBlastRadius", CATEGORY_GENERAL, 8, 0, Integer.MAX_VALUE,
+				"The radius, in blocks, that a beacon will blast dragonskin " +
+						  "blocks overhead when placed." );
 	}
 
 	/*

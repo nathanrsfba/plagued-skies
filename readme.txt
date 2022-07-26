@@ -20,6 +20,11 @@ randomly die, with a random chance of dropping dragonscale, which falls like
 gravel. The egg need only be placed once; healing will continue even if it is
 picked up again.
 
+Small patches of plague can be temporarily removed by placing a beacon
+underneath it (activating it is not necessary), with no blocks in between.
+This only removes plague when the beacon is placed; a sitting beacon will
+not prevent growth around it.
+
 Configuration:
 
 The plaguesky.cfg file has a few configuration options to control the spread
@@ -57,6 +62,9 @@ orePercent: The percent chance that, upon landing, a dragonscale block turns
 into a valuable ore. Also controls the speed at which an already-landed block
 turns into ore.
 
+beaconBlastRadius: Size of area affected when a beacon is placed under
+a plague patch
+
 skinOres: The ores that might be released from Dragonscale. This can be a
 resource ID (minecraft:stone), a resource ID with metadata (minecraft:coal:1)
 or an oredict entry (oreIron). Note that despite the name, this can be any
@@ -82,3 +90,9 @@ serves mainly as a helper command for the Creeping Dark pack:
 /loadchunk <dimension> <chunkX> <chunkZ>
 
 This loads the chunk at the given dimension and coordinates.
+
+Changes:
+
+v1.4:
+ * Added feature to remove dragonskin using beacon
+
