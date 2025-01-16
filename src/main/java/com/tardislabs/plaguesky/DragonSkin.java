@@ -71,6 +71,13 @@ public class DragonSkin extends Block
 	{
 		long now = world.getTotalWorldTime();
 		
+		// Hijacking this callback for delayed chunkloading
+		if( CommandLoadChunk.queueTime >= 0 && now > CommandLoadChunk.queueTime )
+		{
+			CommandLoadChunk.loadQueuedChunk();
+		}
+		
+		
 		if( Data.get( world ).isHealing() )
 		{
 			if( now < nextDecay ) return;

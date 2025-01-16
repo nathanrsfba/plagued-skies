@@ -87,11 +87,17 @@ off)
 There is another command, not strictly related to the Plagued Sky effect. It
 serves mainly as a helper command for the Creeping Dark pack:
 
-/loadchunk <dimension> <chunkX> <chunkZ>
+/loadchunk <dimension> <chunkX> <chunkZ> [delay]
 
 This loads the chunk at the given dimension and coordinates.
 
+If delay is specified, loading the chunk will be delayed by that many ticks.
+Note that only one chunkload operation can be queued at once in this fashion.
+
 Changes:
+
+v1.4.1:
+ * Added ability to delay loading chunks from /loadchunk command
 
 v1.4:
  * Added feature to remove dragonskin using beacon

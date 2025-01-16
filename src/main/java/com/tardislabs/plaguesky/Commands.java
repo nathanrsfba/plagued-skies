@@ -68,6 +68,13 @@ class CommandHeal extends CommandBase
 
 class CommandLoadChunk extends CommandBase
 {
+	/* Location and information for delayed chunk load */
+	static int queueX, queueZ, queueDim;
+	static MinecraftServer queueServer;
+	static ICommandSender queueSender;
+	/* World time for delayed chunk load, <0 == None */
+	static long queueTime = -1;
+	
 	@Override
 	public String getUsage( ICommandSender sender ) 
 	{
@@ -77,16 +84,16 @@ class CommandLoadChunk extends CommandBase
 	@Override
 	public void execute( MinecraftServer server, ICommandSender sender, String[] args ) throws CommandException 
 	{
-		if( args.length != 3 )
+		if( args.length < 3 || args.length > 4 )
 		{
 			sender.sendMessage( new TextComponentString( "Invalid number of arguments" ));
 			return;
 		}
 
-		int iargs[] = new int[3];
+		int iargs[] = new int[4];
 		try
 		{
-			for( int i = 0; i < iargs.length; i++ )
+			for( int i = 0; i < args.length; i++ )
 			{
 				iargs[i] = Integer.parseInt( args[i] );
 			}
@@ -96,20 +103,48 @@ class CommandLoadChunk extends CommandBase
 			sender.sendMessage( new TextComponentString( "Invalid argument" ));
 			return;
 		}
+		
+		if( args.length < 4 )
+		{
+			loadChunk( server, sender, iargs[0], iargs[1], iargs[2] );
+			PlagueSky.mutter( "Loading immediately" );
+		}
+		else
+		{
+			PlagueSky.mutter( "Loading delayed" );
+			queueX = iargs[1];
+			queueZ = iargs[2];
+			queueDim = iargs[0];
+			queueServer = server;
+			queueSender = sender;
+			
+			queueTime = server.getWorld( 0 ).getTotalWorldTime() + iargs[3];
+
+		}
+	}
+
+	static public void loadQueuedChunk()
+	{
+		loadChunk( queueServer, queueSender, queueDim, queueX, queueZ );
+		queueTime = -1;
+	}
 	
-		WorldServer worldsvr = server.getWorld( iargs[0] );
+	static public void loadChunk( MinecraftServer server, ICommandSender sender, int dim, int x, int z )
+	{
+		WorldServer worldsvr = server.getWorld( dim );
 		if( worldsvr == null )
 		{
 			sender.sendMessage( new TextComponentString( "Invalid dimension" ));
 			return;
 		}
 		
+		
 		IChunkProvider iprovider = worldsvr.getChunkProvider();
 		if( !(iprovider instanceof ChunkProviderServer) ) return;
 		ChunkProviderServer provider = (ChunkProviderServer) iprovider;
 
-		provider.loadChunk( iargs[1], iargs[2] );
-		sender.sendMessage( new TextComponentString( "Loaded chunk " + iargs[1] + "x" + iargs[2] + " (DIM" + iargs[0] + ")" ));
+		provider.loadChunk( x, z );
+		sender.sendMessage( new TextComponentString( "Loaded chunk " + x + "x" + z + " (DIM" + dim + ")" ));
 	}
 	
 	@Override
