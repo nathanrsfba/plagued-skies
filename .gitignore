@@ -37,3 +37,5 @@ run
 # Files from Forge MDK
 forge*changelog.txt
 
+# Include gradle scripts
+!gradlew.bat
