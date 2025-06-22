@@ -13,6 +13,6 @@ bin/
 build/
 emc/
 *.launch
-gradle/
-gradlew
 run/
+
+!gradlew.bat
