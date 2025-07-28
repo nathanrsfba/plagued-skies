@@ -51,7 +51,7 @@ public class PlagueSky {
     }
 
     public static void mutter(String message) {
-        LOGGER.info(message);
+        if( Config.COMMON.debug.get() ) LOGGER.info(message);
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
