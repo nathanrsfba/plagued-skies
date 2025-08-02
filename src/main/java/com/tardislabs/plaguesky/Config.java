@@ -94,11 +94,11 @@ public class Config {
             dropBlocks = builder
                     .comment("The blocks that might be released from Dragonscale. " +
                             "This can be a resource ID (minecraft:stone) or a tag" +
-                            "entry (forge:ores/iron)")
+                            "entry (#forge:ores/iron)")
                     .defineList("dropBlocks", ImmutableList.of(
-                            "forge:ores/iron",
-                            "forge:ores/diamond",
-                            "forge:ores/gold"
+                            "#forge:ores/iron",
+                            "#forge:ores/diamond",
+                            "#forge:ores/gold"
                     ), (val) -> true);
 
             debug = builder
