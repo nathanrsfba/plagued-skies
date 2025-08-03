@@ -36,6 +36,8 @@ new one is seeded in a loaded chunk.
 seedChunks: When seeding new dragonskin growths, how many chunks to add new
 growths to
 
+seedRadius: Maximum distance from a player to seed growths
+
 growthPercent: This controls the rate of spread of existing growths. Each time
 a dragonskin block ticks (similar to grass growing), it has this percentage
 chance of spreading to an adjacent space. This can be greater than 100
@@ -62,10 +64,11 @@ orePercent: The percent chance that, upon landing, a dragonscale block turns
 into a valuable ore. Also controls the speed at which an already-landed block
 turns into ore.
 
-skinOres: The ores that might be released from Dragonscale. This can be a
-resource ID (minecraft:stone), a resource ID with metadata (minecraft:coal:1)
-or an oredict entry (oreIron). Note that despite the name, this can be any
-placeable block, not just ores.
+dropBlocks: The blocks that might be released from Dragonscale. This can be a
+resource ID (minecraft:stone), or a tag (#forge:ores/iron)
+
+plagueHeight: The world height that plague spawns at. It will slowly consume
+blocks it encounters, spreading upwards if blocks are above this level.
 
 beaconBlastRadius: The radius, in blocks, of dragonskin cleared by placing a
 beacon.
