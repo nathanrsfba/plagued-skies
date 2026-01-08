@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = PlagueSky.MODID)
-public class TestEvent {
+public class PSBlockEvent {
     @SuppressWarnings("resource")
     @SubscribeEvent
     public static void onEntityPlace(BlockEvent.EntityPlaceEvent event) {
