@@ -31,7 +31,7 @@ public class PlagueSky {
     /**
      * The version of this mod
      */
-    public static final String VERSION = "1.5";
+    public static final String VERSION = "1.5.1";
     /**
      * Event handler for dragon egg being placed
      */

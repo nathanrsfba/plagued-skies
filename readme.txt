@@ -92,8 +92,12 @@ not needed in the present version of the pack.
 
 Changes:
 
+v1.5.1:
+ * Players can no longer respawn on plague
+
 v1.5:
  * Ported to 1.20.1
  * Added feature to remove dragonskin using beacon
  * Removed chunk load command
  * 'Patchy' decay currently not implemented
+
